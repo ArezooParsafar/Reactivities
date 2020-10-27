@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using MediatR;
 using Persistence;
 
@@ -34,7 +36,7 @@ namespace Application.Activities
                 if (activity == null)
                 {
 
-                    throw new Exception("can not be found");
+                    throw new RestException(HttpStatusCode.NotFound, new { activity = "not Found" });
                 }
 
                 activity.Title = request.Title ?? activity.Title;
